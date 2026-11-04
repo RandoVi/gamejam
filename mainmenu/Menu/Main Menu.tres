@@ -1,7 +1,0 @@
-[gd_resource type="DynamicFont" format=2]
-
-[ext_resource type="DynamicFontData" uid="uid://ct4hhsyyh7d7e" path="res://mainmenu/Menu/ARIAL.TTF" id="1"]
-
-[resource]
-size = 48
-font_data = ExtResource( 1 )

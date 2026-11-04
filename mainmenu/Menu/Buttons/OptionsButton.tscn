@@ -1,9 +1,0 @@
-[gd_scene format=2]
-
-[ext_resource type="PackedScene" path="res://mainmenu/Menu/Buttons/StartButton.tscn" id="1"]
-
-[node name="OptionsButton" instance=ExtResource( 1 )]
-scene_to_load = "res://Menu/Options.tscn"
-
-[node name="Label" parent="." index="0"]
-text = "Options"
