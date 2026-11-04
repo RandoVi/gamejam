@@ -1,0 +1,161 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/menu/options_menu.gd" id="1_options"]
+[ext_resource type="Texture2D" path="res://Assets/Menu/background.png" id="2_background"]
+[ext_resource type="FontFile" path="res://Assets/Menu/ARIAL.TTF" id="3_font"]
+[ext_resource type="PackedScene" path="res://scenes/Menu/FadeIn.tscn" id="4_fade"]
+[ext_resource type="PackedScene" path="res://scenes/Menu/UISound.tscn" id="5_sound"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.03, 0.05, 0.09, 0.55)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.7, 1, 0.35)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+content_margin_left = 28.0
+content_margin_top = 24.0
+content_margin_right = 28.0
+content_margin_bottom = 24.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0.8, 0.2, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_options")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(480, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Panel" type="VBoxContainer" parent="Center/Box"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Title" type="Label" parent="Center/Box/Panel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.97, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.00784314, 0.0235294, 1, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 48
+text = "OPTIONS"
+horizontal_alignment = 1
+
+[node name="MusicRow" type="HBoxContainer" parent="Center/Box/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MusicLabel" type="Label" parent="Center/Box/Panel/MusicRow"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 24
+text = "MUSIC"
+
+[node name="MusicSlider" type="HSlider" parent="Center/Box/Panel/MusicRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -30.0
+max_value = 0.0
+step = 0.5
+value = 0.0
+
+[node name="GameRow" type="HBoxContainer" parent="Center/Box/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="GameLabel" type="Label" parent="Center/Box/Panel/GameRow"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 24
+text = "GAME"
+
+[node name="GameSlider" type="HSlider" parent="Center/Box/Panel/GameRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -30.0
+max_value = 0.0
+step = 0.5
+value = 0.0
+
+[node name="FullscreenRow" type="HBoxContainer" parent="Center/Box/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="FullscreenLabel" type="Label" parent="Center/Box/Panel/FullscreenRow"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 24
+text = "FULL SCREEN"
+
+[node name="Fullscreen" type="CheckBox" parent="Center/Box/Panel/FullscreenRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Back" type="Button" parent="Center/Box/Panel"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+text = "BACK"
+
+[node name="FadeIn" parent="." instance=ExtResource("4_fade")]
+visible = false
+
+[node name="UISound" parent="." instance=ExtResource("5_sound")]
+
+[connection signal="value_changed" from="Center/Box/Panel/MusicRow/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="Center/Box/Panel/GameRow/GameSlider" to="." method="_on_game_slider_value_changed"]
+[connection signal="toggled" from="Center/Box/Panel/FullscreenRow/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="pressed" from="Center/Box/Panel/Back" to="." method="_on_back_pressed"]
+[connection signal="fade_finished" from="FadeIn" to="." method="_on_fade_finished"]

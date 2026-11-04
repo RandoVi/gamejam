@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/BeatManager.gd" id="1_beat"]
+
+[node name="BeatManager" type="Node"]
+script = ExtResource("1_beat")
